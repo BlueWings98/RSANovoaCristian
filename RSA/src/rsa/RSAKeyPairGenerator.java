@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.*;
 import java.util.Base64;
+import java.util.Scanner;
 public class RSAKeyPairGenerator {
     private PrivateKey privateKey;
     private PublicKey publicKey;
@@ -24,12 +25,21 @@ public class RSAKeyPairGenerator {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
         this.publicString = Base64.getEncoder().encodeToString(this.getPublicKey().getEncoded());
         this.privateString = Base64.getEncoder().encodeToString(this.getPrivateKey().getEncoded());
-        System.out.println("Clave Publica en String = " + publicString);
-        System.out.println("Clave Privada en String = " + privateString);
     }
-
+    public String fileToString(){
+        File file = new File("RSA/publicKey");
+        try {
+        Scanner scan = new Scanner(file);
+        this.publicString = Base64.getEncoder().encodeToString(scan.nextLine().getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return this.publicString;
+        
+    }
     public void writeToFile(String path, byte[] key) throws IOException {
         File f = new File(path);
         f.getParentFile().mkdirs();
