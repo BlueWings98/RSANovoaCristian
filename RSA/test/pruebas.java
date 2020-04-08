@@ -57,5 +57,20 @@ public class pruebas {
         } catch (Exception e){
             e.printStackTrace();
         }
+    } 
+    @Test
+    public void leerArchivo(){
+        RSAKeyPairGenerator generador;
+        String Public1 = "";
+        String Public2 = "";
+        try{
+        generador = new RSAKeyPairGenerator();
+        Public1 = generador.getPublicKeyString();
+        Public2 = generador.fileToString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("Pura: "+ Public1);
+        System.out.println("Archivo: "+Public2);
     }
 }
